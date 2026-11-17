@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jayyam & Fibonacci · Matemáticos de la historia</title>
+<meta name="description" content="Omar Jayyam y Leonardo de Pisa (Fibonacci): vida, aportes, impacto hoy, podcast y juego.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Marcellus&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16261f; --ink2:#1d3128; --ink3:#243b30;
+  --cream:#f5f0e4; --cream2:#ece4d1; --paper-line:#d9cfb8;
+  --gold:#c19a5b; --gold-soft:#d8b98a; --rose:#9c3b2e;
+  --text-dark:#2a2a24; --muted-dark:#5d5a4e; --muted-light:#b9c2b8;
+  --display:'Marcellus','Cormorant Garamond',serif;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Jost',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--cream);font-family:var(--sans);font-weight:300;line-height:1.7;font-size:17px;-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:var(--gold-soft)}
+h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:.01em;line-height:1.05;margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.eyebrow{font-family:var(--sans);font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* NAV */
+nav.top{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 28px;
+  background:rgba(22,38,31,.18);-webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%);
+  border:0;
+  transform:translateY(-110%);transition:transform .7s cubic-bezier(.7,0,.2,1),background .4s}
+body.loaded nav.top{transform:none;transition-delay:1.5s}
+body.loaded.ready nav.top{transition-delay:0s}
+body.loaded nav.top.hide{transform:translateY(-110%);transition-delay:0s}
+nav.top.solid{background:rgba(22,38,31,.45)}
+.brand{font-family:var(--display);font-size:1.05rem;letter-spacing:.18em;color:var(--cream);text-decoration:none;text-transform:uppercase;line-height:1.1}
+.brand small{display:block;font-family:var(--sans);font-size:.6rem;letter-spacing:.35em;color:var(--gold)}
+.menu{display:flex;gap:22px;list-style:none;margin:0;padding:0}
+.menu a{color:var(--cream);text-decoration:none;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;opacity:.85}
+.menu a:hover{color:var(--gold-soft);opacity:1}
+.menu-backdrop{display:none}
+.burger{display:none;background:none;border:1px solid rgba(193,154,91,.5);color:var(--cream);width:46px;height:46px;border-radius:50%;cursor:pointer}
+@media(max-width:980px){
+  .burger{display:grid;place-items:center;position:relative;z-index:3;transition:background .3s}
+  .burger .i-close{display:none}
+  .burger[aria-expanded="true"]{background:var(--ink)}
+  .burger[aria-expanded="true"] .i-open{display:none}
+  .burger[aria-expanded="true"] .i-close{display:block}
+  .menu-backdrop{display:block;position:absolute;top:0;left:0;width:100vw;height:100vh;background:rgba(10,18,14,.55);opacity:0;pointer-events:none;transition:opacity .4s;z-index:1}
+  .menu-backdrop.show{opacity:1;pointer-events:auto}
+  .menu{z-index:2}
+  body.menu-open{overflow:hidden}
+  .menu{position:absolute;top:0;right:0;height:100vh;width:min(320px,85vw);background:var(--ink);flex-direction:column;padding:90px 32px;gap:18px;transform:translateX(100%);transition:transform .4s;border-left:1px solid rgba(193,154,91,.3)}
+  .menu.open{transform:none}
+  .menu a{font-size:.9rem}
+}
+
+/* HERO */
+.hero{min-height:100vh;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 20px 90px;background:radial-gradient(ellipse at 50% 40%,#22392e 0%,var(--ink) 70%)}
+.hero-pattern{position:absolute;inset:0;opacity:.13}
+.hero h1{font-size:clamp(2.6rem,9.5vw,9rem);color:var(--cream);position:relative;letter-spacing:.02em}
+.hero h1 .amp{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:.55em;vertical-align:.25em;padding:0 .08em}
+.hero .sub{position:relative;font-size:clamp(.72rem,1.6vw,.95rem);letter-spacing:.42em;text-transform:uppercase;color:var(--cream);opacity:.85;margin-top:14px}
+.hero .quote{position:relative;max-width:640px;margin:46px auto 0;font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,2.2vw,1.45rem);line-height:1.5;color:var(--cream2)}
+.hero .quote cite{display:block;font-style:normal;font-family:var(--sans);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-top:12px}
+/* hero intro (like the video) */
+.curtain{position:fixed;inset:0;z-index:90;background:#0f1b16;pointer-events:none;transition:opacity 1.2s ease .2s}
+body.loaded .curtain{opacity:0}
+.hero-pattern{transform:scale(1.18);opacity:0;transition:transform 3.2s cubic-bezier(.2,.7,.2,1),opacity 2.4s ease}
+body.loaded .hero-pattern{transform:scale(1);opacity:.13}
+.hero-inner{position:relative;will-change:transform}
+.hero h1 .ln{display:inline-block;overflow:hidden;vertical-align:bottom;padding:.06em .02em .14em}
+.hero h1 .ch{display:inline-block;transform:translateY(115%) rotate(6deg);opacity:0;filter:blur(8px);
+  transition:transform 1.1s cubic-bezier(.2,.8,.2,1),opacity .9s ease,filter 1s ease}
+body.loaded .hero h1 .ch{transform:none;opacity:1;filter:blur(0)}
+.hero h1 .amp{display:inline-block;transform:scale(.3) rotate(-40deg);opacity:0;transition:transform 1.2s cubic-bezier(.3,1.5,.4,1) 1.15s,opacity .8s ease 1.15s}
+body.loaded .hero h1 .amp{transform:none;opacity:1}
+.hero .fade{opacity:0;transform:translateY(24px);filter:blur(4px);transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.2,.8,.2,1),filter 1.1s}
+body.loaded .hero .fade{opacity:1;transform:none;filter:none}
+.hero .sub.fade{letter-spacing:.9em;transition-property:opacity,transform,filter,letter-spacing;transition-duration:1.6s}
+body.loaded .hero .sub.fade{letter-spacing:.42em}
+.hero .rule{display:block;width:0;height:1px;background:var(--gold);margin:30px auto 0;transition:width 1.4s cubic-bezier(.7,0,.2,1) 1.3s}
+body.loaded .hero .rule{width:min(260px,50vw)}
+/* section titles rise from a mask */
+.mask{display:block;overflow:hidden;padding-bottom:.08em}
+.mask>span{display:block;transform:translateY(105%);transition:transform 1.1s cubic-bezier(.2,.8,.2,1) .1s}
+.in .mask>span,.mask.in>span{transform:none}
+.scroll-cue{position:absolute;bottom:28px;left:0;right:0;font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;color:var(--muted-light);display:flex;flex-direction:column;align-items:center;gap:10px}
+.scroll-cue span{width:1px;height:46px;background:linear-gradient(var(--gold),transparent);animation:cue 2s infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* PAPER SECTIONS */
+.paper{background:var(--cream);color:var(--text-dark);position:relative;overflow:hidden}
+.paper .eyebrow{color:#8a6a35}
+.paper::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 31px,rgba(150,130,90,.07) 31px 32px);pointer-events:none}
+section{padding:120px 0;position:relative}
+.sec-head{text-align:center;max-width:760px;margin:0 auto 70px}
+.sec-head h2{font-size:clamp(2.6rem,6vw,4.6rem);margin-top:14px}
+.sec-head p{color:inherit;opacity:.8;margin-top:18px}
+
+/* Bio: arches */
+.bio-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+@media(max-width:860px){.bio-grid{grid-template-columns:1fr;gap:90px}}
+.person{text-align:center;display:flex;flex-direction:column}
+.person .body{flex:1}
+.person .facts{margin-top:auto}
+.arch{width:min(300px,78%);aspect-ratio:3/4;margin:0 auto 34px;border-radius:999px 999px 0 0;overflow:hidden;border:1px solid var(--paper-line);box-shadow:0 0 0 10px var(--cream),0 0 0 11px var(--paper-line);background:var(--ink)}
+.arch svg{width:100%;height:100%}
+.person .dates{font-family:var(--serif);font-style:italic;color:#8a6a35;font-size:1.15rem}
+.person h3{font-size:clamp(2rem,4vw,2.8rem);margin:6px 0 4px;color:var(--ink)}
+.person .place{font-size:.75rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted-dark)}
+.person .body{text-align:left;margin-top:28px;color:var(--text-dark)}
+.person .body p{margin:0 0 14px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--paper-line);border-bottom:1px solid var(--paper-line);margin-top:24px}
+.facts div{padding:14px 6px;text-align:center;border-right:1px solid var(--paper-line)}
+.facts div:last-child{border:0}
+.facts b{display:block;font-family:var(--display);font-weight:400;font-size:1.05rem;color:var(--ink)}
+.facts span{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-dark)}
+
+/* TIMELINE */
+.timeline-sec{background:var(--ink)}
+.tl{position:relative;max-width:980px;margin:0 auto}
+.tl-stem{position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);background:rgba(193,154,91,.15)}
+.tl-grow{position:absolute;left:0;top:0;width:100%;height:0;background:linear-gradient(var(--gold-soft),var(--gold))}
+.tl-item{display:grid;grid-template-columns:1fr 70px 1fr;align-items:start;margin-bottom:64px;opacity:.15;transform:translateY(30px);transition:opacity .9s,transform .9s}
+.tl-item.in{opacity:1;transform:none}
+.tl-item .yr{font-family:var(--display);font-size:clamp(2rem,4vw,3rem);color:var(--cream)}
+.tl-item .who{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.tl-item p{margin:6px 0 0;color:var(--muted-light);font-size:.95rem}
+.tl-item .l{text-align:right}
+.tl-item .dot{justify-self:center;width:14px;height:14px;border-radius:50%;margin-top:22px;background:var(--ink);border:2px solid var(--gold);position:relative;z-index:2}
+.tl-item.fib .dot{border-radius:2px;transform:rotate(45deg)}
+.tl-legend{display:flex;gap:28px;justify-content:center;margin-bottom:56px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-light)}
+.tl-legend i{display:inline-block;width:11px;height:11px;border:2px solid var(--gold);border-radius:50%;margin-right:8px;vertical-align:-1px}
+.tl-legend i.sq{border-radius:2px;transform:rotate(45deg)}
+@media(max-width:760px){
+  .tl-stem{left:18px}
+  .tl-item{grid-template-columns:36px 1fr}
+  .tl-item .dot{grid-column:1;grid-row:1;justify-self:start;margin-left:11px}
+  .tl-item .l,.tl-item .r{grid-column:2;grid-row:1;text-align:left}
+  .tl-item .empty{display:none}
+}
+
+/* CONTRIBUTIONS */
+.contrib{display:grid;grid-template-columns:1.05fr 1fr;gap:64px;align-items:center;margin-bottom:120px}
+.contrib.rev{grid-template-columns:1fr 1.05fr}
+.contrib.rev .visual{order:2}
+@media(max-width:900px){.contrib,.contrib.rev{grid-template-columns:1fr}.contrib.rev .visual{order:0}}
+.contrib h3{font-size:clamp(2rem,4vw,3rem);color:var(--ink);margin:10px 0 18px}
+.contrib p{margin:0 0 14px}
+.visual{background:#fffdf7;border:1px solid var(--paper-line);padding:22px;box-shadow:0 30px 60px -40px rgba(22,38,31,.5)}
+.visual figcaption{font-size:.78rem;color:var(--muted-dark);margin-top:10px;text-align:center;font-style:italic;font-family:var(--serif);font-size:1rem}
+.example{margin-top:26px;border-top:2px solid var(--ink);padding-top:20px}
+.example h4{font-family:var(--sans);font-weight:500;font-size:.75rem;letter-spacing:.28em;text-transform:uppercase;color:#8a6a35;margin:0 0 12px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;position:relative;padding:0 0 12px 42px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:28px;height:28px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;font-size:.8rem;color:#8a6a35}
+.math{font-family:var(--serif);font-size:1.18rem;font-style:italic;white-space:nowrap}
+.answer{background:var(--ink);color:var(--cream);padding:14px 18px;margin-top:6px;font-size:.95rem}
+.answer b{color:var(--gold-soft);font-weight:500}
+table.compare{width:100%;border-collapse:collapse;margin:16px 0;font-size:.95rem}
+table.compare th,table.compare td{border-bottom:1px solid var(--paper-line);padding:9px 8px;text-align:left}
+table.compare th{font-weight:500;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-dark)}
+
+/* rabbit interactive */
+.rabbit-ctrl{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.rabbit-ctrl label{font-size:.85rem;color:var(--muted-dark)}
+.rabbit-ctrl input{flex:1;min-width:160px;accent-color:var(--rose)}
+.bars{display:flex;align-items:flex-end;gap:5px;height:220px;border-bottom:1px solid var(--paper-line)}
+.bars div{flex:1;background:var(--ink);position:relative;min-height:2px;transition:height .4s}
+.bars div.cur{background:var(--rose)}
+.bars div span{position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-size:.65rem;color:var(--muted-dark)}
+.months{display:flex;gap:5px;font-size:.62rem;color:var(--muted-dark);margin-top:4px}
+.months span{flex:1;text-align:center}
+.readout{display:flex;justify-content:space-between;align-items:baseline;margin-top:16px;gap:12px;flex-wrap:wrap}
+.readout .big{font-family:var(--display);font-size:2.6rem;color:var(--ink);line-height:1}
+.readout small{color:var(--muted-dark)}
+
+/* IMPACT */
+.impact{background:var(--ink2)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(193,154,91,.25);border:1px solid rgba(193,154,91,.25)}
+@media(max-width:900px){.cards{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.cards{grid-template-columns:1fr}}
+.card{background:var(--ink2);padding:36px 30px;transition:background .3s}
+.card:hover{background:var(--ink3)}
+.card .tag{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.card h3{font-size:1.6rem;margin:12px 0 10px;color:var(--cream)}
+.card p{margin:0;color:var(--muted-light);font-size:.95rem}
+.card svg{width:44px;height:44px;margin-bottom:18px;stroke:var(--gold-soft);fill:none;stroke-width:1.3}
+
+/* PODCAST */
+.podcast-box{max-width:820px;margin:0 auto;display:grid;grid-template-columns:200px 1fr;gap:36px;align-items:center;background:#fffdf7;border:1px solid var(--paper-line);padding:34px}
+@media(max-width:640px){.podcast-box{grid-template-columns:1fr;text-align:center}.podcast-box .cover{margin:0 auto}}
+.cover{width:200px;aspect-ratio:1;background:var(--ink);display:grid;place-items:center;position:relative;overflow:hidden}
+.cover svg{position:absolute;inset:0;width:100%;height:100%}
+.cover b{position:relative;font-family:var(--display);font-weight:400;color:var(--cream);font-size:1.4rem;text-align:center;line-height:1.1}
+.cover b small{display:block;font-family:var(--sans);font-size:.55rem;letter-spacing:.3em;color:var(--gold);margin-top:8px}
+.podcast-box h3{font-size:2rem;color:var(--ink);margin-bottom:6px}
+.podcast-box audio{width:100%;margin:18px 0 8px}
+.podcast-box .note{font-size:.82rem;color:var(--muted-dark)}
+
+/* GAME */
+.game-sec{background:var(--ink)}
+.quiz{max-width:760px;margin:0 auto;border:1px solid rgba(193,154,91,.35);padding:44px;background:var(--ink2);position:relative}
+@media(max-width:600px){.quiz{padding:26px 20px}}
+.q-top{display:flex;justify-content:space-between;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.q-bar{height:2px;background:rgba(193,154,91,.2);margin-bottom:30px}
+.q-bar i{display:block;height:100%;background:var(--gold);width:0;transition:width .4s}
+.q-text{font-family:var(--serif);font-size:clamp(1.35rem,3vw,1.75rem);line-height:1.35;margin-bottom:26px;color:var(--cream)}
+.opts{display:grid;gap:12px}
+.opt{font:inherit;font-size:1rem;text-align:left;padding:15px 20px;min-height:52px;background:transparent;color:var(--cream);border:1px solid rgba(245,240,228,.25);cursor:pointer;transition:all .2s}
+.opt:hover:not(:disabled){border-color:var(--gold);background:rgba(193,154,91,.08)}
+.opt.ok{border-color:#7fb08a;background:rgba(127,176,138,.16)}
+.opt.bad{border-color:#d0806f;background:rgba(208,128,111,.14)}
+.opt:disabled{cursor:default}
+.feedback{margin-top:20px;font-size:.95rem;color:var(--muted-light);min-height:1.5em}
+.btn{font:inherit;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;padding:15px 30px;min-height:48px;background:var(--gold);color:var(--ink);border:0;cursor:pointer;margin-top:20px;font-weight:500}
+.btn:hover{background:var(--gold-soft)}
+.btn.ghost{background:transparent;color:var(--gold-soft);border:1px solid var(--gold)}
+.result{text-align:center}
+.result .score{font-family:var(--display);font-size:5rem;color:var(--gold-soft);line-height:1}
+
+/* seq mini game */
+.seq{max-width:760px;margin:40px auto 0;text-align:center;border-top:1px solid rgba(193,154,91,.25);padding-top:40px}
+.seq h3{font-size:1.8rem;margin-bottom:8px}
+.seq-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:22px 0}
+.seq-row span,.seq-row input{width:62px;height:62px;display:grid;place-items:center;border:1px solid rgba(193,154,91,.4);font-family:var(--display);font-size:1.4rem;color:var(--cream);background:transparent;text-align:center}
+.seq-row input{border-color:var(--gold);outline:none}
+.seq-row input:focus{background:rgba(193,154,91,.1)}
+
+/* CURIOUS */
+.curious-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+@media(max-width:760px){.curious-grid{grid-template-columns:1fr}}
+.cur{border-top:1px solid var(--ink);padding-top:20px;display:grid;grid-template-columns:62px 1fr;gap:16px}
+.cur .n{font-family:var(--display);font-size:2.6rem;color:var(--gold);line-height:1}
+.cur h3{font-size:1.4rem;color:var(--ink);margin-bottom:6px}
+.cur p{margin:0;font-size:.97rem}
+
+/* SOURCES & AI */
+.src-list{max-width:900px;margin:0 auto;padding-left:0;list-style:none}
+.src-list li{padding:14px 0 14px 2.2em;text-indent:-2.2em;border-bottom:1px solid rgba(193,154,91,.18);color:var(--muted-light);font-size:.95rem}
+.src-list li i{color:var(--cream)}
+.ai-table{width:100%;max-width:980px;margin:0 auto;border-collapse:collapse;font-size:.95rem}
+.ai-table th{font-weight:500;font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:#8a6a35;text-align:left;padding:12px;border-bottom:2px solid var(--ink)}
+.ai-table td{padding:14px 12px;border-bottom:1px solid var(--paper-line);vertical-align:top}
+.table-scroll{overflow-x:auto}
+.ai-note{max-width:980px;margin:34px auto 0;padding:22px 26px;background:var(--ink);color:var(--cream2);font-size:.95rem}
+.ai-note b{color:var(--gold-soft);font-weight:500}
+
+footer{background:#0f1b16;padding:50px 0;text-align:center;font-size:.8rem;color:var(--muted-light);letter-spacing:.08em}
+footer .brand{display:inline-block;margin-bottom:14px}
+
+.progress{position:fixed;left:0;bottom:0;height:3px;background:var(--gold);z-index:60;width:0}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1s,transform 1s}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal,.tl-item{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="curtain" aria-hidden="true"></div>
+<div class="progress" id="progress"></div>
+
+<nav class="top" id="nav">
+  <a class="brand" href="#inicio">Jayyam &amp; Fibonacci<small>Matemáticos de la historia</small></a>
+  <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
+    <svg class="i-open" width="20" height="20" viewBox="0 0 20 20" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg>
+    <svg class="i-close" width="20" height="20" viewBox="0 0 20 20" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg>
+  </button>
+  <div class="menu-backdrop" id="menuBackdrop"></div>
+  <ul class="menu" id="menu">
+    <li><a href="#biografia">Biografía</a></li>
+    <li><a href="#linea">Línea de tiempo</a></li>
+    <li><a href="#aportes">Aportes</a></li>
+    <li><a href="#impacto">Impacto</a></li>
+    <li><a href="#podcast">Podcast</a></li>
+    <li><a href="#juego">Juego</a></li>
+    <li><a href="#curiosos">Curiosidades</a></li>
+    <li><a href="#fuentes">Fuentes</a></li>
+    <li><a href="#ia">Uso de IA</a></li>
+  </ul>
+</nav>
+
+<!-- 1. INICIO -->
+<header class="hero" id="inicio">
+  <svg class="hero-pattern" aria-hidden="true" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <pattern id="star" width="120" height="120" patternUnits="userSpaceOnUse">
+        <g fill="none" stroke="#d8b98a" stroke-width="1">
+          <rect x="35" y="35" width="50" height="50"/>
+          <rect x="35" y="35" width="50" height="50" transform="rotate(45 60 60)"/>
+          <circle cx="60" cy="60" r="12"/>
+          <path d="M0 60h25M95 60h25M60 0v25M60 95v25"/>
+        </g>
+      </pattern>
+    </defs>
+    <rect width="600" height="800" fill="url(#star)"/>
+    <g fill="none" stroke="#d8b98a" stroke-width="1.4" transform="translate(640 120)">
+      <!-- golden spiral built from Fibonacci squares -->
+      <rect x="0" y="0" width="340" height="340"/><rect x="340" y="0" width="210" height="210"/>
+      <rect x="420" y="210" width="130" height="130"/><rect x="340" y="260" width="80" height="80"/>
+      <rect x="340" y="210" width="50" height="50"/>
+      <path d="M340 340 A340 340 0 0 1 0 0 M0 0 M340 0 A210 210 0 0 1 550 210 M550 210 A130 130 0 0 1 420 340 M420 340 A80 80 0 0 1 340 260 M340 260 A50 50 0 0 1 390 210"/>
+    </g>
+  </svg>
+  <div class="hero-inner" id="heroInner">
+    <p class="eyebrow fade" style="transition-delay:.25s">Siglos XI – XIII · Persia &amp; Pisa</p>
+    <h1 aria-label="Jayyam y Fibonacci"><span class="ln split" aria-hidden="true">Jayyam</span><span class="amp" aria-hidden="true">&amp;</span><span class="ln split" aria-hidden="true">Fibonacci</span></h1>
+    <p class="sub fade" style="transition-delay:1.25s">Dos puentes entre Oriente y Occidente</p>
+    <span class="rule" aria-hidden="true"></span>
+    <blockquote class="quote fade" style="transition-delay:1.7s">“Quien piense que el álgebra es un truco para obtener incógnitas, piensa en vano.”
+      <cite>Omar Jayyam · Tratado de álgebra (paráfrasis)</cite></blockquote>
+  </div>
+  <div class="scroll-cue fade" style="transition-delay:2.2s" aria-hidden="true">Desliza<span></span></div>
+</header>
+
+<!-- 2. BIOGRAFIA -->
+<section class="paper" id="biografia">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Capítulo I</p>
+      <h2>Biografía</h2>
+      <p>Uno nació en Persia en tiempos del Imperio selyúcida; el otro, en la Pisa mercantil de la Edad Media. Ninguno se conoció, pero ambos recibieron el saber matemático del mundo islámico y lo llevaron más lejos.</p>
+    </div>
+    <div class="bio-grid">
+      <article class="person reveal">
+        <div class="arch">
+          <svg viewBox="0 0 300 400" role="img" aria-label="Ilustración geométrica: estrella persa y cónicas (ilustración propia, no es un retrato)">
+            <rect width="300" height="400" fill="#16261f"/>
+            <g fill="none" stroke="#d8b98a" stroke-width="1.2" opacity=".9">
+              <circle cx="150" cy="170" r="90"/>
+              <rect x="86" y="106" width="128" height="128"/>
+              <rect x="86" y="106" width="128" height="128" transform="rotate(45 150 170)"/>
+              <circle cx="150" cy="170" r="40"/>
+              <path d="M40 360 Q150 120 260 360" stroke="#c19a5b" stroke-width="1.6"/>
+            </g>
+            <text x="150" y="380" text-anchor="middle" font-family="Marcellus" font-size="16" fill="#f5f0e4" letter-spacing="4">عمر خیام</text>
+          </svg>
+        </div>
+        <p class="dates">18 de mayo de 1048 – 4 de diciembre de 1131</p>
+        <h3>Omar Jayyam</h3>
+        <p class="place">Nishapur, Persia (hoy Irán)</p>
+        <div class="body">
+          <p>Su nombre completo era <em>Ghiyath al-Din Abu'l-Fath Umar ibn Ibrahim al-Nisaburi al-Khayyami</em>. “Al-Khayyami” significa <strong>“fabricante de tiendas”</strong>, probablemente el oficio de su padre.</p>
+          <p>Se formó en filosofía y ciencias en Nishapur. Vivió una época de inestabilidad política: la dinastía selyúcida dominaba la región y el mecenazgo de los gobernantes decidía si un sabio podía investigar o no.</p>
+          <p>En Samarcanda escribió su gran obra, el <em>Tratado sobre la demostración de problemas de álgebra</em>. Luego el sultán <strong>Malik-Shah</strong> y su visir <strong>Nizam al-Mulk</strong> lo invitaron a Isfahán para dirigir un observatorio, donde elaboró tablas astronómicas y participó en la reforma del calendario.</p>
+          <p>Tras la muerte de sus protectores perdió apoyo y fue criticado por religiosos ortodoxos por su pensamiento libre. Más tarde trabajó en Merv y terminó sus días en su ciudad natal, donde hoy está su mausoleo.</p>
+        </div>
+        <div class="facts"><div><b>Álgebra</b><span>Cúbicas</span></div><div><b>Astronomía</b><span>Calendario</span></div><div><b>Poesía</b><span>Rubaiyat</span></div></div>
+      </article>
+
+      <article class="person reveal">
+        <div class="arch">
+          <svg viewBox="0 0 300 400" role="img" aria-label="Ilustración geométrica: espiral áurea con cuadrados de Fibonacci (ilustración propia, no es un retrato)">
+            <rect width="300" height="400" fill="#16261f"/>
+            <g fill="none" stroke="#d8b98a" stroke-width="1.2" transform="translate(28 95)">
+              <rect x="0" y="0" width="150" height="150"/><rect x="150" y="0" width="93" height="93"/>
+              <rect x="186" y="93" width="57" height="57"/><rect x="150" y="114" width="36" height="36"/>
+              <rect x="150" y="93" width="21" height="21"/>
+              <path d="M150 150 A150 150 0 0 1 0 0 M150 0 A93 93 0 0 1 243 93 M243 93 A57 57 0 0 1 186 150 M186 150 A36 36 0 0 1 150 114 M150 114 A21 21 0 0 1 171 93" stroke="#c19a5b" stroke-width="1.8"/>
+            </g>
+            <text x="150" y="300" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="22" fill="#f5f0e4">1 · 1 · 2 · 3 · 5 · 8 · 13</text>
+            <text x="150" y="380" text-anchor="middle" font-family="Marcellus" font-size="13" fill="#c19a5b" letter-spacing="5">LIBER ABACI · MCCII</text>
+          </svg>
+        </div>
+        <p class="dates">c. 1170 – después de 1240</p>
+        <h3>Leonardo de Pisa</h3>
+        <p class="place">Pisa, República de Pisa (hoy Italia)</p>
+        <div class="body">
+          <p>Hijo de <strong>Guglielmo Bonacci</strong>, un mercader pisano. “Fibonacci” es un apodo posterior que viene de <em>filius Bonacci</em> (“hijo de Bonacci”); él mismo a veces firmaba como <strong>“Bigollo”</strong> (viajero o “bueno para nada”).</p>
+          <p>Siendo niño, su padre fue nombrado cónsul de los comerciantes pisanos en <strong>Bugía</strong> (hoy Béjaïa, Argelia). Allí estudió cálculo con un maestro árabe y descubrió el sistema de numeración indoarábigo.</p>
+          <p>Viajó por Egipto, Siria, Grecia, Sicilia y Provenza comparando métodos de cálculo. Hacia 1200 volvió a Pisa y en <strong>1202</strong> publicó el <em>Liber Abaci</em>.</p>
+          <p>Su fama llegó al emperador <strong>Federico II</strong>, quien lo recibió en Pisa en los años 1220. En 1240 la ciudad le concedió un salario por asesorarla en contabilidad. Después de esa fecha se pierde su rastro.</p>
+        </div>
+        <div class="facts"><div><b>Aritmética</b><span>Numerales 0–9</span></div><div><b>Comercio</b><span>Contabilidad</span></div><div><b>Sucesión</b><span>1,1,2,3,5…</span></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 3. LINEA DE TIEMPO -->
+<section class="timeline-sec" id="linea">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Capítulo II</p>
+      <h2>Línea de tiempo</h2>
+    </div>
+    <div class="tl-legend"><span><i></i>Omar Jayyam</span><span><i class="sq"></i>Fibonacci</span></div>
+    <div class="tl" id="tl">
+      <div class="tl-stem"><div class="tl-grow" id="tlGrow"></div></div>
+
+      <div class="tl-item"><div class="l"><div class="who">Jayyam</div><div class="yr">1048</div><p>Nace en Nishapur, Jorasán (Persia), el 18 de mayo.</p></div><div class="dot"></div><div class="empty"></div></div>
+      <div class="tl-item"><div class="l"><div class="who">Jayyam</div><div class="yr">c. 1070</div><p>En Samarcanda escribe el <em>Tratado sobre la demostración de problemas de álgebra</em>, con la clasificación de las ecuaciones cúbicas.</p></div><div class="dot"></div><div class="empty"></div></div>
+      <div class="tl-item"><div class="l"><div class="who">Jayyam</div><div class="yr">1073–1074</div><p>Malik-Shah lo invita a Isfahán a dirigir un observatorio; comienza la reforma del calendario con otros siete sabios.</p></div><div class="dot"></div><div class="empty"></div></div>
+      <div class="tl-item"><div class="l"><div class="who">Jayyam</div><div class="yr">1079</div><p>El 15 de marzo se adopta el <strong>calendario Jalali</strong>. Mide el año solar en 365,24219858156 días.</p></div><div class="dot"></div><div class="empty"></div></div>
+      <div class="tl-item"><div class="l"><div class="who">Jayyam</div><div class="yr">1092</div><p>Mueren Nizam al-Mulk y Malik-Shah; el observatorio pierde financiación y Jayyam cae en desgracia.</p></div><div class="dot"></div><div class="empty"></div></div>
+      <div class="tl-item"><div class="l"><div class="who">Jayyam</div><div class="yr">1131</div><p>Muere en Nishapur el 4 de diciembre, a los 83 años.</p></div><div class="dot"></div><div class="empty"></div></div>
+
+      <div class="tl-item fib"><div class="empty"></div><div class="dot"></div><div class="r"><div class="who">Fibonacci</div><div class="yr">c. 1170</div><p>Nace Leonardo, probablemente en Pisa.</p></div></div>
+      <div class="tl-item fib"><div class="empty"></div><div class="dot"></div><div class="r"><div class="who">Fibonacci</div><div class="yr">c. 1180–1200</div><p>Estudia en Bugía (Argelia) y viaja por el Mediterráneo aprendiendo los métodos árabes e indios.</p></div></div>
+      <div class="tl-item fib"><div class="empty"></div><div class="dot"></div><div class="r"><div class="who">Fibonacci</div><div class="yr">1202</div><p>Publica el <em>Liber Abaci</em>: introduce en Europa los numerales indoarábigos y el problema de los conejos.</p></div></div>
+      <div class="tl-item fib"><div class="empty"></div><div class="dot"></div><div class="r"><div class="who">Fibonacci</div><div class="yr">1220–1225</div><p>Escribe <em>Practica geometriae</em> (1220) y <em>Flos</em> (1225); es recibido por el emperador Federico II en Pisa.</p></div></div>
+      <div class="tl-item fib"><div class="empty"></div><div class="dot"></div><div class="r"><div class="who">Fibonacci</div><div class="yr">1225</div><p><em>Liber quadratorum</em>, su obra de teoría de números.</p></div></div>
+      <div class="tl-item fib"><div class="empty"></div><div class="dot"></div><div class="r"><div class="who">Fibonacci</div><div class="yr">1228</div><p>Segunda edición del <em>Liber Abaci</em>, dedicada a Michael Scot.</p></div></div>
+      <div class="tl-item fib"><div class="empty"></div><div class="dot"></div><div class="r"><div class="who">Fibonacci</div><div class="yr">1240</div><p>Pisa le otorga un salario por sus servicios en contabilidad. Es el último documento que lo menciona.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. APORTES -->
+<section class="paper" id="aportes">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Capítulo III</p>
+      <h2>Aportes a las matemáticas</h2>
+    </div>
+
+    <div class="contrib reveal">
+      <div>
+        <p class="eyebrow">Omar Jayyam · Álgebra geométrica</p>
+        <h3>Resolver cúbicas cortando cónicas</h3>
+        <p>Una ecuación cúbica tiene una incógnita elevada al cubo (<span class="math">x³</span>). En el siglo XI no existía una fórmula para resolverlas. Jayyam hizo dos cosas notables:</p>
+        <p><strong>1. Las clasificó todas</strong> (con coeficientes positivos) por tipos y dio un método geométrico para cada caso.<br>
+        <strong>2. Las resolvió dibujando:</strong> la solución es el punto donde se cruzan dos curvas cónicas, por ejemplo una parábola y un círculo. Además afirmó que con regla y compás no bastaba, algo que se demostró unos 750 años después, y notó que una cúbica puede tener más de una solución.</p>
+        <p>También trabajó sobre el postulado de las paralelas de Euclides y en el cálculo de raíces.</p>
+
+        <div class="example">
+          <h4>Ejercicio resuelto al estilo Jayyam</h4>
+          <p>Resolver <span class="math">x³ + 4x = 16</span></p>
+          <ol class="steps">
+            <li>Jayyam escribe la ecuación como <span class="math">x³ + a²x = a²b</span>. Aquí <span class="math">a² = 4 → a = 2</span> y <span class="math">a²b = 16 → b = 4</span>.</li>
+            <li>Dibuja la <strong>parábola</strong> <span class="math">x² = a·y</span>, es decir <span class="math">y = x²/2</span>.</li>
+            <li>Dibuja el <strong>círculo</strong> de diámetro <span class="math">b = 4</span> sobre el eje x: <span class="math">(x − 2)² + y² = 4</span>.</li>
+            <li>Sustituyendo <span class="math">y = x²/2</span> en el círculo: <span class="math">x² − 4x + x⁴/4 = 0</span> → <span class="math">x(x³ + 4x − 16) = 0</span>. ¡Aparece nuestra cúbica!</li>
+            <li>El corte (distinto del origen) está en <strong>(2, 2)</strong>.</li>
+          </ol>
+          <div class="answer">Solución: <b>x = 2</b> · Comprobación: 2³ + 4·2 = 8 + 8 = 16 ✓</div>
+        </div>
+      </div>
+      <figure class="visual" style="margin:0">
+        <svg viewBox="-1.2 -4.6 6.4 6.4" role="img" aria-label="Gráfica: la parábola y igual a x al cuadrado sobre 2 y el círculo de centro (2,0) y radio 2 se cortan en el punto (2,2)">
+          <g transform="scale(1,-1)">
+            <g stroke="#d9cfb8" stroke-width=".015">
+              <path d="M-1 -1h6M-1 0h6M-1 1h6M-1 2h6M-1 3h6M-1 4h6M-1 -1v5.5M0 -1v5.5M1 -1v5.5M2 -1v5.5M3 -1v5.5M4 -1v5.5M5 -1v5.5"/>
+            </g>
+            <path d="M-1.2 0H5.2M0 -1.2V4.4" stroke="#5d5a4e" stroke-width=".03"/>
+            <circle cx="2" cy="0" r="2" fill="none" stroke="#16261f" stroke-width=".06"/>
+            <path id="parab" fill="none" stroke="#9c3b2e" stroke-width=".06" d=""/>
+            <circle cx="2" cy="2" r=".14" fill="#c19a5b" stroke="#16261f" stroke-width=".03"/>
+            <circle cx="0" cy="0" r=".08" fill="#5d5a4e"/>
+          </g>
+          <g font-family="Jost" font-size=".26" fill="#2a2a24">
+            <text x="2.2" y="-2.15">(2, 2)</text>
+            <text x="2.9" y="-1.7" fill="#16261f">círculo</text>
+            <text x="2.95" y="-3.9" fill="#9c3b2e">y = x²/2</text>
+            <text x="4.9" y=".35">x</text><text x=".1" y="-4.3">y</text>
+            <text x="1.9" y=".38">2</text><text x="3.9" y=".38">4</text>
+          </g>
+        </svg>
+        <figcaption>La parábola y el círculo se cruzan justo en x = 2: la raíz de la cúbica.</figcaption>
+      </figure>
+    </div>
+
+    <div class="contrib reveal">
+      <div>
+        <p class="eyebrow">Omar Jayyam · Astronomía</p>
+        <h3>El calendario Jalali</h3>
+        <p>Por encargo de Malik-Shah, Jayyam y otros siete sabios reformaron el calendario. El resultado, adoptado el <strong>15 de marzo de 1079</strong>, es un calendario solar que empieza el año en el equinoccio de primavera.</p>
+        <p>Jayyam midió el año en <strong>365,24219858156 días</strong> (el valor moderno es ≈ 365,2422). Usaba un ciclo de años bisiestos más fino que el juliano; el historiador Edward Gibbon dijo que superaba al juliano y se acercaba a la precisión del gregoriano.</p>
+      </div>
+      <figure class="visual" style="margin:0">
+        <table class="compare">
+          <thead><tr><th>Calendario</th><th>Duración media del año</th></tr></thead>
+          <tbody>
+            <tr><td>Juliano (46 a. C.)</td><td>365,25 días</td></tr>
+            <tr><td><strong>Jayyam (1079)</strong></td><td><strong>365,24219858… días</strong></td></tr>
+            <tr><td>Gregoriano (1582)</td><td>365,2425 días</td></tr>
+            <tr><td>Año trópico (hoy)</td><td>≈ 365,2422 días</td></tr>
+          </tbody>
+        </table>
+        <figcaption>Su medición coincide con el valor actual en las cuatro primeras cifras decimales.</figcaption>
+      </figure>
+    </div>
+
+    <div class="contrib rev reveal">
+      <figure class="visual" style="margin:0">
+        <table class="compare">
+          <thead><tr><th></th><th>Romanos</th><th>Indoarábigos</th></tr></thead>
+          <tbody>
+            <tr><td>Año de Liber Abaci</td><td>MCCII</td><td>1202</td></tr>
+            <tr><td>Un número grande</td><td>MMMDCCCLXXXVIII</td><td>3888</td></tr>
+            <tr><td>¿Cero?</td><td>No existe</td><td>0</td></tr>
+            <tr><td>¿Valor posicional?</td><td>No</td><td>Sí</td></tr>
+          </tbody>
+        </table>
+        <figcaption>Con numerales romanos, sumar o multiplicar por escrito era muy engorroso; por eso se usaba el ábaco.</figcaption>
+      </figure>
+      <div>
+        <p class="eyebrow">Fibonacci · Numeración</p>
+        <h3>Los números que usamos hoy</h3>
+        <p>En el <em>Liber Abaci</em> (1202) Fibonacci presentó el <em>modus Indorum</em>, el “método de los indios”: <strong>diez cifras (0–9) y valor posicional</strong>. El valor de una cifra depende de su lugar: en 3888 cada 8 vale distinto (800, 80 y 8).</p>
+        <p>El libro estaba pensado para mercaderes: enseñaba a convertir monedas y medidas, calcular intereses, repartir ganancias y llevar cuentas. Así los numerales indoarábigos se extendieron por Europa y fueron sustituyendo poco a poco a los romanos.</p>
+      </div>
+    </div>
+
+    <div class="contrib reveal">
+      <div>
+        <p class="eyebrow">Fibonacci · La sucesión</p>
+        <h3>El problema de los conejos</h3>
+        <p>En el Liber Abaci aparece este problema: <em>una pareja de conejos se pone en un recinto. Cada pareja engendra una nueva pareja cada mes, y las crías empiezan a reproducirse desde su segundo mes. ¿Cuántas parejas habrá al cabo de un año?</em></p>
+        <div class="example">
+          <h4>Ejercicio resuelto</h4>
+          <ol class="steps">
+            <li>Cada mes, las parejas son <strong>las del mes anterior</strong> (nadie muere) <strong>más las crías</strong>.</li>
+            <li>Solo tienen crías las parejas que ya existían hace dos meses. Por eso: <span class="math">Fₙ = Fₙ₋₁ + Fₙ₋₂</span>.</li>
+            <li>Empezando con 1, 2 (Fibonacci no puso el primer 1): 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, <strong>377</strong>.</li>
+          </ol>
+          <div class="answer">Al final del año hay <b>377 parejas</b>, la respuesta que da el propio Fibonacci.</div>
+        </div>
+      </div>
+      <figure class="visual" style="margin:0">
+        <div class="rabbit-ctrl">
+          <label for="month">Mes:</label>
+          <input type="range" id="month" min="0" max="12" value="12">
+        </div>
+        <div class="bars" id="bars"></div>
+        <div class="months" id="months"></div>
+        <div class="readout">
+          <div><small>Parejas en el mes <span id="mlabel">12</span></small><div class="big" id="pairs">377</div></div>
+          <div style="text-align:right"><small>Cociente con el anterior</small><div class="big" id="ratio" style="font-size:1.8rem">1,6180</div></div>
+        </div>
+        <figcaption>Mueve el control: el cociente entre términos seguidos se acerca a φ ≈ 1,618, la razón áurea.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 5. IMPACTO -->
+<section class="impact" id="impacto">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Capítulo IV</p>
+      <h2>Impacto hoy</h2>
+      <p>Mil años después, sus ideas siguen en el bolsillo de cualquier persona.</p>
+    </div>
+    <div class="cards reveal">
+      <div class="card"><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="6" y="9" width="32" height="29"/><path d="M6 17h32M14 5v8M30 5v8"/></svg><span class="tag">Jayyam</span><h3>Calendario persa</h3><p>El calendario Jalali es la base del calendario solar que usan hoy Irán y Afganistán; su Año Nuevo (Nowruz) cae en el equinoccio de marzo.</p></div>
+      <div class="card"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M4 40Q22 -4 40 40"/><circle cx="22" cy="26" r="11"/></svg><span class="tag">Jayyam</span><h3>Geometría + álgebra</h3><p>Unir curvas y ecuaciones anticipó la geometría analítica de Descartes. Hoy los ordenadores resuelven ecuaciones buscando dónde se cruzan curvas, igual que él.</p></div>
+      <div class="card"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="16"/><path d="M22 6v32M10 14l24 16M34 14L10 30"/></svg><span class="tag">Jayyam</span><h3>Óptica y antenas</h3><p>Las cónicas que usó están en antenas parabólicas, faros de carro, telescopios y en las órbitas de los satélites.</p></div>
+      <div class="card"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M8 12h28M8 22h28M8 32h28"/><text x="22" y="27" font-size="0" /></svg><span class="tag">Fibonacci</span><h3>Todo lo digital</h3><p>Cuentas bancarias, precios, celulares y programación usan el sistema posicional con cero que él difundió en Europa (y la computación usa su “primo”, el sistema binario).</p></div>
+      <div class="card"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M22 22a3 3 0 0 1 3 3a6 6 0 0 1-6 6a9 9 0 0 1-9-9a15 15 0 0 1 15-15a24 24 0 0 1 15 6"/></svg><span class="tag">Fibonacci</span><h3>Naturaleza</h3><p>Los números de Fibonacci aparecen en la disposición de semillas de girasol, piñas y hojas (filotaxis), y en la espiral áurea.</p></div>
+      <div class="card"><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="6" y="6" width="12" height="12"/><rect x="22" y="6" width="16" height="16"/><rect x="6" y="22" width="20" height="16"/></svg><span class="tag">Fibonacci</span><h3>Informática</h3><p>Hay algoritmos con su nombre (búsqueda de Fibonacci, montículos de Fibonacci), y los equipos ágiles estiman tareas con la escala 1, 2, 3, 5, 8, 13…</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. PODCAST -->
+<section class="paper" id="podcast">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Capítulo V</p>
+      <h2>Podcast</h2>
+    </div>
+    <div class="podcast-box reveal">
+      <div class="cover">
+        <svg viewBox="0 0 200 200" aria-hidden="true"><g fill="none" stroke="#c19a5b" stroke-width="1" opacity=".5"><circle cx="100" cy="100" r="80"/><circle cx="100" cy="100" r="60"/><circle cx="100" cy="100" r="40"/></g></svg>
+        <b>Del Álgebra<br>al Ábaco<small>EPISODIO 01</small></b>
+      </div>
+      <div>
+        <p class="eyebrow">3 – 5 minutos</p>
+        <h3>Jayyam y Fibonacci: los puentes del número</h3>
+        <p>Un viaje de Nishapur a Pisa: un poeta-astrónomo que resolvía ecuaciones con curvas y un comerciante que cambió para siempre la forma de escribir los números.</p>
+        <audio controls preload="metadata">
+          <source src="podcast.m4a" type="audio/mp4">
+          <source src="podcast.mp3" type="audio/mpeg">
+          Tu navegador no soporta audio. <a href="podcast.m4a">Descargar el episodio</a>.
+        </audio>
+        <p class="note">Episodio generado con NotebookLM a partir de fuentes verificadas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. JUEGO -->
+<section class="game-sec" id="juego">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Capítulo VI</p>
+      <h2>Juego interactivo</h2>
+      <p>Pon a prueba lo que aprendiste. 10 preguntas.</p>
+    </div>
+    <div class="quiz" id="quiz" aria-live="polite"></div>
+
+    <div class="seq">
+      <h3>Reto: completa la sucesión</h3>
+      <p style="color:var(--muted-light)">Escribe los números que faltan y pulsa Comprobar.</p>
+      <div class="seq-row" id="seqRow"></div>
+      <button class="btn ghost" id="seqCheck">Comprobar</button>
+      <button class="btn ghost" id="seqNew">Nueva</button>
+      <p class="feedback" id="seqFb"></p>
+    </div>
+  </div>
+</section>
+
+<!-- 8. CURIOSIDADES -->
+<section class="paper" id="curiosos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Capítulo VII</p>
+      <h2>Datos curiosos</h2>
+    </div>
+    <div class="curious-grid">
+      <div class="cur reveal"><span class="n">01</span><div><h3>El “cosedor de tiendas” de la ciencia</h3><p>Jayyam jugaba con su apellido: escribió que él “cosía las tiendas de la ciencia”.</p></div></div>
+      <div class="cur reveal"><span class="n">02</span><div><h3>Más famoso como poeta</h3><p>En Occidente se le conoció primero por las <em>Rubaiyat</em> (cuartetas) que tradujo Edward FitzGerald en 1859, aunque no se sabe con certeza cuáles escribió él.</p></div></div>
+      <div class="cur reveal"><span class="n">03</span><div><h3>Once decimales</h3><p>Dio la duración del año con once cifras decimales: 365,24219858156 días.</p></div></div>
+      <div class="cur reveal"><span class="n">04</span><div><h3>Una predicción de 750 años</h3><p>Afirmó que ciertas cúbicas no se podían resolver con regla y compás; la demostración llegó en el siglo XIX.</p></div></div>
+      <div class="cur reveal"><span class="n">05</span><div><h3>“Fibonacci” no era su nombre</h3><p>Nunca se llamó así: el apodo (<em>filius Bonacci</em>) se popularizó siglos después. Él firmaba “Leonardo Pisano” o “Bigollo”.</p></div></div>
+      <div class="cur reveal"><span class="n">06</span><div><h3>El Liber Abaci original se perdió</h3><p>No se conserva ninguna copia de la edición de 1202; lo que leemos viene de la versión revisada de 1228.</p></div></div>
+      <div class="cur reveal"><span class="n">07</span><div><h3>Un reto del emperador</h3><p>Juan de Palermo, de la corte de Federico II, le planteó problemas difíciles; Fibonacci publicó las soluciones en su libro <em>Flos</em> (“Flor”).</p></div></div>
+      <div class="cur reveal"><span class="n">08</span><div><h3>Una revista solo para su sucesión</h3><p>Desde 1963 existe <em>The Fibonacci Quarterly</em>, una revista científica dedicada a esta sucesión.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. FUENTES -->
+<section id="fuentes">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Capítulo VIII</p>
+      <h2>Fuentes</h2>
+      <p>Referencias consultadas, en formato APA 7.</p>
+    </div>
+    <ol class="src-list reveal">
+      <li>Encyclopaedia Britannica. (s. f.). <i>Fibonacci</i>. Recuperado el 17 de noviembre de 2026, de https://www.britannica.com/biography/Fibonacci</li>
+      <li>Encyclopaedia Britannica. (s. f.). <i>Omar Khayyam</i>. Recuperado el 17 de noviembre de 2026, de https://www.britannica.com/print/article/428267</li>
+      <li>Encyclopaedia Iranica. (s. f.). <i>Khayyam, Omar xv. As astronomer</i>. https://www.iranicaonline.org/articles/khayyam-omar/khayyam-omar-xv-as-astronomer</li>
+      <li>Heydari-Malayeri, M. (2004). <i>A concise review of the Iranian calendar</i>. arXiv. https://arxiv.org/abs/astro-ph/0409620</li>
+      <li>Huffman, C. J. (s. f.). <i>Mathematical treasure: Fibonacci's Liber Abaci</i>. Mathematical Association of America, Convergence. https://old.maa.org/node/841546</li>
+      <li>O'Connor, J. J., &amp; Robertson, E. F. (1998). <i>Leonardo Pisano Fibonacci</i>. MacTutor History of Mathematics Archive, University of St Andrews. https://mathshistory.st-andrews.ac.uk/Biographies/Fibonacci/</li>
+      <li>O'Connor, J. J., &amp; Robertson, E. F. (1999). <i>Omar Khayyam</i>. MacTutor History of Mathematics Archive, University of St Andrews. https://mathshistory.st-andrews.ac.uk/Biographies/Khayyam/</li>
+      <li>Sigler, L. E. (2002). <i>Fibonacci's Liber Abaci: A translation into modern English of Leonardo Pisano's Book of Calculation</i>. Springer.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 10. USO DE IA -->
+<section class="paper" id="ia">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Capítulo IX</p>
+      <h2>Uso de IA</h2>
+      <p>La IA fue una herramienta de apoyo. Todos los datos se verificaron en las fuentes anteriores.</p>
+    </div>
+    <div class="table-scroll reveal">
+      <table class="ai-table">
+        <thead><tr><th>Herramienta</th><th>Para qué se usó</th><th>Qué verificamos o corregimos</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Claude (Anthropic)</strong></td><td>Búsqueda inicial de fuentes, borrador de textos y código HTML/CSS/JS de la página, ejemplo resuelto y juego.</td><td>Fechas, nombres y cifras contrastados con MacTutor y Britannica; se revisó la resolución de la cúbica a mano.</td></tr>
+          <tr><td><strong>NotebookLM (Google)</strong></td><td>Generación del episodio del podcast (resumen en audio) a partir de un documento con los datos verificados.</td><td>El audio se extendió más del tiempo solicitado (3 a 5 minutos), por lo que se ajustó su duración; además se corrigieron palabras puntuales mal pronunciadas o imprecisas.</td></tr>
+          <tr><td><strong>GitHub Pages</strong></td><td>Publicación gratuita de la página.</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ai-note reveal"><b>Qué tuvimos que corregir:</b> en el podcast, NotebookLM generó un audio más largo de lo pedido y algunas palabras puntuales tuvieron que corregirse. En los textos, la IA tiende a dar fechas exactas donde las fuentes dudan (p. ej. la muerte de Fibonacci, que solo se sabe que fue después de 1240) y a atribuirle a Jayyam todas las <em>Rubaiyat</em>, cuando su autoría es incierta. Las ilustraciones son diseños geométricos propios, no retratos reales: no existen retratos de época de ninguno de los dos.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#inicio">Jayyam &amp; Fibonacci<small>Electiva · Matemáticos de la historia con IA</small></a>
+    <p>Proyecto final · 2026 · Esteban Cardona · Ingenieria de Software</p>
+  </div>
+</footer>
+
+<script>
+// nav
+const nav=document.getElementById('nav'),menu=document.getElementById('menu'),burger=document.getElementById('burger');
+const backdrop=document.getElementById('menuBackdrop');
+function setMenu(o){
+  menu.classList.toggle('open',o);backdrop.classList.toggle('show',o);
+  document.body.classList.toggle('menu-open',o);
+  burger.setAttribute('aria-expanded',o);burger.setAttribute('aria-label',o?'Cerrar menú':'Abrir menú');
+  if(o)nav.classList.remove('hide');
+}
+burger.addEventListener('click',()=>setMenu(!menu.classList.contains('open')));
+backdrop.addEventListener('click',()=>setMenu(false));
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.classList.contains('open'))setMenu(false)});
+addEventListener('resize',()=>{if(innerWidth>980)setMenu(false)});
+
+// hero intro: split letters, staggered rise
+let k=0;
+document.querySelectorAll('.hero h1 .split').forEach(el=>{
+  const t=el.textContent;el.textContent='';
+  [...t].forEach(c=>{const s=document.createElement('span');s.className='ch';s.textContent=c;s.style.transitionDelay=(0.35+k*0.06)+'s';el.appendChild(s);k++});
+});
+// section titles: wrap in mask
+document.querySelectorAll('.sec-head h2').forEach(h=>{h.innerHTML='<span class="mask"><span>'+h.innerHTML+'</span></span>'});
+requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add('loaded')));
+setTimeout(()=>document.body.classList.add('ready'),2400);
+
+// scroll effects
+const prog=document.getElementById('progress'),tl=document.getElementById('tl'),grow=document.getElementById('tlGrow');
+const heroInner=document.getElementById('heroInner'),heroPat=document.querySelector('.hero-pattern');
+let lastY=0;
+function onScroll(){
+  const h=document.documentElement;const y=h.scrollTop;const p=y/(h.scrollHeight-h.clientHeight);
+  prog.style.width=(p*100)+'%';
+  nav.classList.toggle('solid',y>60);
+  // hide header going down, show going up
+  if(!menu.classList.contains('open')){
+    if(y>120&&y>lastY+4)nav.classList.add('hide');
+    else if(y<lastY-4||y<=120)nav.classList.remove('hide');
+  }
+  lastY=y;
+  // hero parallax: title rises faster and fades, like the video
+  if(y<innerHeight*1.2){
+    heroInner.style.transform=`translateY(${-y*0.45}px)`;
+    heroInner.style.opacity=Math.max(0,1-y/(innerHeight*0.75));
+    if(document.body.classList.contains('loaded'))heroPat.style.transform=`scale(1) translateY(${y*0.2}px)`;
+  }
+  const r=tl.getBoundingClientRect();const vh=innerHeight;
+  const t=Math.min(1,Math.max(0,(vh*0.6-r.top)/r.height));
+  grow.style.height=(t*100)+'%';
+}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.15});
+document.querySelectorAll('.reveal,.tl-item').forEach(el=>io.observe(el));
+
+// parabola path
+(function(){let d='';for(let x=-1;x<=3.05;x+=.05){const y=x*x/2;d+=(d?'L':'M')+x.toFixed(2)+' '+y.toFixed(3)}document.getElementById('parab').setAttribute('d',d)})();
+
+// rabbits
+const fib=[1,2];while(fib.length<13)fib.push(fib[fib.length-1]+fib[fib.length-2]);
+const seqFull=[1].concat(fib); // month0 =1
+const bars=document.getElementById('bars'),months=document.getElementById('months'),slider=document.getElementById('month');
+seqFull.forEach((v,i)=>{const b=document.createElement('div');b.innerHTML='<span></span>';bars.appendChild(b);const m=document.createElement('span');m.textContent=i;months.appendChild(m)});
+function drawRabbits(){
+  const n=+slider.value;const max=seqFull[n];
+  [...bars.children].forEach((b,i)=>{b.style.height=i<=n?(seqFull[i]/max*100)+'%':'2px';b.classList.toggle('cur',i===n);b.querySelector('span').textContent=i<=n&&(i===n||max<100||seqFull[i]>=max*.12)?seqFull[i]:''});
+  document.getElementById('mlabel').textContent=n;document.getElementById('pairs').textContent=seqFull[n];
+  document.getElementById('ratio').textContent=n>0?(seqFull[n]/seqFull[n-1]).toFixed(4).replace('.',','):'—';
+}
+slider.addEventListener('input',drawRabbits);drawRabbits();
+
+// quiz
+const Q=[
+ {q:'¿En qué ciudad nació Omar Jayyam?',o:['Bagdad','Nishapur','Isfahán','Samarcanda'],a:1,e:'Nació en Nishapur, en la región de Jorasán (actual Irán), en 1048.'},
+ {q:'¿Qué significa el nombre “al-Khayyami”?',o:['Astrónomo','Poeta del vino','Fabricante de tiendas','Hijo del sultán'],a:2,e:'Significa “fabricante de tiendas”, probablemente el oficio de su padre.'},
+ {q:'¿Cómo resolvía Jayyam las ecuaciones cúbicas?',o:['Con una fórmula algebraica general','Con el ábaco','Intersectando curvas cónicas','Por tanteo con números romanos'],a:2,e:'Hallaba la solución donde se cortan dos cónicas, como una parábola y un círculo.'},
+ {q:'¿En qué año se adoptó el calendario Jalali?',o:['1079','1202','1131','1582'],a:0,e:'Se adoptó el 15 de marzo de 1079.'},
+ {q:'Solución de x³ + 4x = 16:',o:['x = 1','x = 2','x = 4','x = 16'],a:1,e:'2³ + 4·2 = 8 + 8 = 16.'},
+ {q:'¿Qué significa “Fibonacci”?',o:['Hijo de Bonacci','El gran calculador','Hombre de Pisa','Viajero'],a:0,e:'Viene de “filius Bonacci”, hijo de Bonacci.'},
+ {q:'¿Dónde aprendió Fibonacci los numerales indoarábigos?',o:['En Roma','En Bugía, norte de África','En Constantinopla','En París'],a:1,e:'Su padre trabajaba en Bugía (hoy Béjaïa, Argelia), donde estudió con un maestro árabe.'},
+ {q:'¿Cómo se llama el libro de 1202 de Fibonacci?',o:['Practica geometriae','Flos','Liber Abaci','Rubaiyat'],a:2,e:'El Liber Abaci, o “Libro del cálculo”.'},
+ {q:'¿Cuántas parejas de conejos hay al cabo de un año según Fibonacci?',o:['144','233','377','610'],a:2,e:'1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377.'},
+ {q:'¿A qué número se acerca el cociente entre dos términos seguidos de Fibonacci?',o:['π ≈ 3,1416','e ≈ 2,718','φ ≈ 1,618','√2 ≈ 1,414'],a:2,e:'A la razón áurea φ ≈ 1,618.'}
+];
+let qi=0,score=0;const quiz=document.getElementById('quiz');
+function renderQ(){
+  if(qi>=Q.length){quiz.innerHTML=`<div class="result"><p class="eyebrow">Resultado</p><div class="score">${score}/${Q.length}</div><p class="q-text" style="margin-top:14px">${score>=9?'¡Digno del observatorio de Isfahán!':score>=6?'¡Muy bien! Un buen mercader de números.':'Repasa la página y vuelve a intentarlo.'}</p><button class="btn" id="again">Jugar de nuevo</button></div>`;document.getElementById('again').onclick=()=>{qi=0;score=0;renderQ()};return}
+  const it=Q[qi];
+  quiz.innerHTML=`<div class="q-top"><span>Pregunta ${qi+1} de ${Q.length}</span><span>Puntos: ${score}</span></div><div class="q-bar"><i style="width:${qi/Q.length*100}%"></i></div><p class="q-text">${it.q}</p><div class="opts">${it.o.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="feedback" id="fb"></p>`;
+  quiz.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i;quiz.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    quiz.querySelectorAll('.opt')[it.a].classList.add('ok');
+    if(i===it.a){score++;document.getElementById('fb').innerHTML='<b style="color:#9fd0a9">¡Correcto!</b> '+it.e}else{b.classList.add('bad');document.getElementById('fb').innerHTML='<b style="color:#e8a090">Casi.</b> '+it.e}
+    const nx=document.createElement('button');nx.className='btn';nx.textContent=qi<Q.length-1?'Siguiente':'Ver resultado';nx.onclick=()=>{qi++;renderQ()};quiz.appendChild(nx);nx.focus();
+  });
+}
+renderQ();
+
+// sequence mini-game
+const row=document.getElementById('seqRow'),sfb=document.getElementById('seqFb');let cur=[];
+function newSeq(){
+  const s=Math.floor(Math.random()*6);const f=[1,1];while(f.length<s+8)f.push(f[f.length-1]+f[f.length-2]);
+  const part=f.slice(s,s+7);const hide=new Set();while(hide.size<2)hide.add(2+Math.floor(Math.random()*5));
+  cur=part.map((v,i)=>({v,h:hide.has(i)}));
+  row.innerHTML=cur.map((c,i)=>c.h?`<input inputmode="numeric" aria-label="Número ${i+1}" data-i="${i}">`:`<span>${c.v}</span>`).join('');sfb.textContent='';
+}
+document.getElementById('seqCheck').onclick=()=>{const ins=[...row.querySelectorAll('input')];const ok=ins.every(x=>+x.value===cur[+x.dataset.i].v);sfb.innerHTML=ok?'<b style="color:#9fd0a9">¡Exacto!</b> Cada número es la suma de los dos anteriores.':'<b style="color:#e8a090">Todavía no.</b> Pista: suma los dos números anteriores.'};
+document.getElementById('seqNew').onclick=newSeq;newSeq();
+</script>
+</body>
+</html>
